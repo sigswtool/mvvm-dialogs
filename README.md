@@ -10,7 +10,10 @@
 - [Custom windows](#custom-windows)
 - [Custom framework dialogs](#custom-framework-dialogs)
 - [More in the wiki](#more-in-the-wiki)
+- [MVVM Dialogs Contrib](#mvvm-dialogs-contrib)
 - [Install MVVM Dialogs via NuGet](#install-mvvm-dialogs-via-nuget)
+- [History](#history)
+- [Reputation](#reputation)
 - [Credit](#credit)
 
 ---
@@ -50,7 +53,7 @@ To open a modal window, decorate the view with the attached property `DialogServ
     md:DialogServiceViews.IsRegistered="True">
 
   ...
-  
+
 </UserControl>
 ```
 
@@ -122,6 +125,12 @@ MVVM Dialogs is by default opening the standard Windows message box or the open 
 
 For more information regarding the concepts of MVVM Dialogs and extended samples on the subjects, please read the [wiki](https://github.com/FantasticFiasco/mvvm-dialogs/wiki).
 
+## MVVM Dialogs Contrib
+
+The world is full of snowflakes and all applications are unique in some way. MVVM Dialogs takes no claim to solve all issues regarding dialogs, but is a fantastic solution for most applications. The rest, the applications deviating from the common path, may require specific changes to the behavior of MVVM Dialog. For those there is [MVVM Dialogs Contrib](https://github.com/FantasticFiasco/mvvm-dialogs-contrib). A repository with features and functionality developed by the open source community, solving very specific needs.
+
+If MVVM Dialogs for some reason doesn't fit your application, raise an issue in [MVVM Dialogs Contrib](https://github.com/FantasticFiasco/mvvm-dialogs-contrib) and we'll see what we can do. These features are always implemented by the community, but shepherd by the maintainers of MVVM Dialogs.
+
 ## Install MVVM Dialogs via NuGet
 
 If you want to include MVVM Dialogs in your project, you can [install it directly from NuGet](https://www.nuget.org/packages/MvvmDialogs/).
@@ -131,6 +140,16 @@ To install MVVM Dialogs, run the following command in the Package Manager Consol
 ```
 PM> Install-Package MvvmDialogs
 ```
+
+## History
+
+MVVM Dialogs started out as an [article on CodeProject](https://www.codeproject.com/Articles/36745/Showing-Dialogs-When-Using-the-MVVM-Pattern-in-WPF) with its first revision published in May 2009. At that time MVVM was still new and fresh, and the now hugely popular [MVVM Light](http://www.mvvmlight.net/) had yet not been published. In fact, none of the MVVM libraries commonly used today existed back then. MVVM Dialogs came about out of necessity to work with dialogs from the view model, a reaction to the fact that although MVVM was a popular pattern, the support to implement it was rather limited.
+
+Now many years later, MVVM Dialogs is still maintained and new features are implemented on demand. The framework has grown up, and found its place in the world...
+
+## Reputation
+
+MVVM Dialogs has earned enough reputation to be listed on [Awesome .NET!](https://github.com/quozd/awesome-dotnet), in company with other awesome MVVM libraries.
 
 ## Credit
 

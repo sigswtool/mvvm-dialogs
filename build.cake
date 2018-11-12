@@ -12,7 +12,6 @@ var configuration = Argument("configuration", "Release");
 //////////////////////////////////////////////////////////////////////
 
 var solution = new FilePath("./MvvmDialogs.sln");
-var netProject = new FilePath("./src/net/MvvmDialogs.csproj");
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -20,7 +19,7 @@ var netProject = new FilePath("./src/net/MvvmDialogs.csproj");
 
 Task("Clean")
     .Description("Clean all files")
-    .Does (() =>
+    .Does(() =>
     {
 	    CleanDirectories("./**/bin");
 	    CleanDirectories("./**/obj");
@@ -39,21 +38,8 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        // Build for default .NET version
         MSBuild(solution, settings => settings
             .SetConfiguration(configuration)
-            .SetMaxCpuCount(0));    // Enable parallel build
-
-        // Build for .NET version 4.0
-        MSBuild(netProject, settings => settings
-            .SetConfiguration(configuration)
-            .WithProperty("TargetFrameworkVersion", "v4.0")
-            .SetMaxCpuCount(0));    // Enable parallel build
-
-        // Build for .NET version 3.5
-        MSBuild(netProject, settings => settings
-            .SetConfiguration(configuration)
-            .WithProperty("TargetFrameworkVersion", "v3.5")
             .SetMaxCpuCount(0));    // Enable parallel build
     });
 
@@ -62,7 +48,7 @@ Task("Pack")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        var version = GetAssemblyVersion("./SolutionInfo.cs");
+        var version = GetAssemblyVersion("./Directory.Build.props");
         var branch = EnvironmentVariable("APPVEYOR_REPO_BRANCH");
 
         // Unless on master, this is a pre-release

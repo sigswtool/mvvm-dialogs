@@ -6,6 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/) and is followi
 
 ## Unreleased
 
+## 5.2.1 - 2018-10-30
+
+### :syringe: Fixed
+
+- [#49](https://github.com/FantasticFiasco/mvvm-dialogs/issues/49) - `FilterIndex` wasn't updated on closed Open/Save File dialog
+
 ## 5.2.0 - 2018-10-11
 
 ### :zap: Added

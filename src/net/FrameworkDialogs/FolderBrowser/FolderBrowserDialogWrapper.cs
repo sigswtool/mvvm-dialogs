@@ -10,7 +10,7 @@ namespace MvvmDialogs.FrameworkDialogs.FolderBrowser
     internal sealed class FolderBrowserDialogWrapper : IFrameworkDialog
     {
         private readonly FolderBrowserDialogSettings settings;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderBrowserDialogWrapper"/> class.
         /// </summary>
@@ -23,19 +23,19 @@ namespace MvvmDialogs.FrameworkDialogs.FolderBrowser
         /// <inheritdoc />
         public bool? ShowDialog(Window owner)
         {
-            if (owner == null)
-                throw new ArgumentNullException(nameof(owner));
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
 
-            using (var folderBrowserDialog = new FolderBrowserDialog())
+            using (var dialog = new FolderBrowserDialog())
             {
-                folderBrowserDialog.Description = settings.Description;
-                folderBrowserDialog.SelectedPath = settings.SelectedPath;
-                folderBrowserDialog.ShowNewFolderButton = settings.ShowNewFolderButton;
+                var sync = new FolderBrowserDialogSettingsSync(dialog, settings);
 
-                DialogResult result = folderBrowserDialog.ShowDialog(new Win32Window(owner));
+                // Update dialog
+                sync.ToDialog();
+
+                DialogResult result = dialog.ShowDialog(new Win32Window(owner));
 
                 // Update settings
-                settings.SelectedPath = folderBrowserDialog.SelectedPath;
+                sync.ToSettings();
 
                 switch (result)
                 {
@@ -46,7 +46,7 @@ namespace MvvmDialogs.FrameworkDialogs.FolderBrowser
                     case DialogResult.No:
                     case DialogResult.Abort:
                         return false;
-                    
+
                     default:
                         return null;
                 }

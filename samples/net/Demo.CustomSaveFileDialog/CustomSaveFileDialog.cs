@@ -46,14 +46,14 @@ namespace Demo.CustomSaveFileDialog
         /// </returns>
         public bool? ShowDialog(Window owner)
         {
-            if (owner == null)
-                throw new ArgumentNullException(nameof(owner));
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
 
             var result = saveFileDialog.ShowDialog(owner);
 
             // Update settings
             settings.FileName = saveFileDialog.FileName;
             settings.FileNames = saveFileDialog.FileNames;
+            settings.FilterIndex = saveFileDialog.FilterIndex;
 
             return result;
         }

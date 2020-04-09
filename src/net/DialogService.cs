@@ -57,9 +57,9 @@ namespace MvvmDialogs
         /// <see cref="DefaultFrameworkDialogFactory"/>.
         /// </param>
         public DialogService(
-            IDialogFactory dialogFactory = null,
-            IDialogTypeLocator dialogTypeLocator = null,
-            IFrameworkDialogFactory frameworkDialogFactory = null)
+            IDialogFactory? dialogFactory = null,
+            IDialogTypeLocator? dialogTypeLocator = null,
+            IFrameworkDialogFactory? frameworkDialogFactory = null)
         {
             this.dialogFactory = dialogFactory ?? new ReflectionDialogFactory();
             this.dialogTypeLocator = dialogTypeLocator ?? new NamingConventionDialogTypeLocator();
@@ -106,7 +106,7 @@ namespace MvvmDialogs
 
         /// <inheritdoc />
         public bool? ShowDialog<T>(
-        INotifyPropertyChanged ownerViewModel,
+            INotifyPropertyChanged ownerViewModel,
             IModalDialogViewModel viewModel)
             where T : Window
         {
@@ -141,9 +141,30 @@ namespace MvvmDialogs
         }
 
         /// <inheritdoc />
+        public bool Activate(INotifyPropertyChanged viewModel)
+        {
+            if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
+
+            foreach (Window? window in Application.Current.Windows)
+            {
+                if (window == null)
+                {
+                    continue;
+                }
+
+                if (viewModel.Equals(window.DataContext))
+                {
+                    return window.Activate();
+                }
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc />
         public MessageBoxResult ShowMessageBox(
             INotifyPropertyChanged ownerViewModel,
-            string messageBoxText,
+            string? messageBoxText,
             string caption = "",
             MessageBoxButton button = MessageBoxButton.OK,
             MessageBoxImage icon = MessageBoxImage.None,
@@ -298,7 +319,7 @@ namespace MvvmDialogs
 
             if (view == null)
             {
-                string message = $"View model of type '{viewModel.GetType()}' is not present as data context on any registered view." +
+                string message = $"View model of type '{viewModel.GetType()}' is not present as data context on any registered view. " +
                     "Please register the view by setting DialogServiceViews.IsRegistered=\"True\" in your XAML.";
 
                 throw new ViewNotRegisteredException(message);

@@ -5,9 +5,9 @@
 // associated with an assembly.
 [assembly: AssemblyCompany("FantasticFiasco")]
 [assembly: AssemblyProduct("MVVM Dialogs")]
-[assembly: AssemblyCopyright("Copyright © 2009-2018 MVVM Dialogs contributors")]
+[assembly: AssemblyCopyright("Copyright © 2009-2019 MVVM Dialogs contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Assembly version
-[assembly: AssemblyVersion("5.2.1")]
+[assembly: AssemblyVersion("7.0.0")]
